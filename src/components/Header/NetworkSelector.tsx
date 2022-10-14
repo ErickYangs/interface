@@ -186,6 +186,8 @@ const BridgeLabel = ({ chainId }: { chainId: SupportedChainId }) => {
     case SupportedChainId.CELO:
     case SupportedChainId.CELO_ALFAJORES:
       return <Trans>Portal Bridge</Trans>
+    case SupportedChainId.ONTOLOGY_EVM:
+      return <Trans>Ontology EVM Bridge</Trans>
     default:
       return <Trans>Bridge</Trans>
   }
@@ -277,6 +279,7 @@ const NETWORK_SELECTOR_CHAINS = [
   SupportedChainId.OPTIMISM,
   SupportedChainId.ARBITRUM_ONE,
   SupportedChainId.CELO,
+  SupportedChainId.ONTOLOGY_EVM,
 ]
 
 export default function NetworkSelector() {

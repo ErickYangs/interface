@@ -139,6 +139,7 @@ export const USDC: { [chainId in SupportedChainId]: Token } = {
   [SupportedChainId.RINKEBY]: USDC_RINKEBY,
   [SupportedChainId.KOVAN]: USDC_KOVAN,
   [SupportedChainId.ROPSTEN]: USDC_ROPSTEN,
+  [SupportedChainId.ONTOLOGY_EVM]: USDC_ROPSTEN,
 }
 export const DAI_POLYGON = new Token(
   SupportedChainId.POLYGON,
@@ -337,6 +338,13 @@ export const CEUR_CELO_ALFAJORES = new Token(
   'CEUR',
   'Celo Euro Stablecoin'
 )
+export const ONG_EVM = new Token(
+  SupportedChainId.ONTOLOGY_EVM,
+  '0xe8cf015f797877a9a23e80447429c0b0f04e114b',
+  18,
+  'WONG',
+  'WONG'
+)
 
 export const UNI: { [chainId: number]: Token } = {
   [SupportedChainId.MAINNET]: new Token(SupportedChainId.MAINNET, UNI_ADDRESS[1], 18, 'UNI', 'Uniswap'),
@@ -404,6 +412,13 @@ export const WRAPPED_NATIVE_CURRENCY: { [chainId: number]: Token | undefined } =
     'CELO',
     'Celo native asset'
   ),
+  [SupportedChainId.ONTOLOGY_EVM]: new Token(
+    SupportedChainId.ONTOLOGY_EVM,
+    '0xe8cf015f797877a9a23e80447429c0b0f04e114b',
+    18,
+    'WONG',
+    'Wrapped ONG'
+  ),
 }
 
 export function isCelo(chainId: number): chainId is SupportedChainId.CELO | SupportedChainId.CELO_ALFAJORES {
@@ -421,8 +436,21 @@ function getCeloNativeCurrency(chainId: number) {
   }
 }
 
+function getONGNativeCurrency(chainId: number) {
+  switch (chainId) {
+    case SupportedChainId.ONTOLOGY_EVM:
+      return ONG_EVM
+    default:
+      throw new Error('Not wong')
+  }
+}
+
 function isMatic(chainId: number): chainId is SupportedChainId.POLYGON | SupportedChainId.POLYGON_MUMBAI {
   return chainId === SupportedChainId.POLYGON_MUMBAI || chainId === SupportedChainId.POLYGON
+}
+
+function isONTEVM(chainId: number): chainId is SupportedChainId.ONTOLOGY_EVM {
+  return chainId === SupportedChainId.ONTOLOGY_EVM
 }
 
 class MaticNativeCurrency extends NativeCurrency {
@@ -460,14 +488,19 @@ export class ExtendedEther extends Ether {
 const cachedNativeCurrency: { [chainId: number]: NativeCurrency | Token } = {}
 export function nativeOnChain(chainId: number): NativeCurrency | Token {
   if (cachedNativeCurrency[chainId]) return cachedNativeCurrency[chainId]
+  // console.warn('achedNativeCurrency[chainId]', cachedNativeCurrency[chainId])
   let nativeCurrency: NativeCurrency | Token
   if (isMatic(chainId)) {
     nativeCurrency = new MaticNativeCurrency(chainId)
   } else if (isCelo(chainId)) {
     nativeCurrency = getCeloNativeCurrency(chainId)
+  } else if (isONTEVM(chainId)) {
+    nativeCurrency = getONGNativeCurrency(chainId)
   } else {
     nativeCurrency = ExtendedEther.onChain(chainId)
   }
+  // console.warn('nativeCurrency[chainId]', nativeCurrency)
+
   return (cachedNativeCurrency[chainId] = nativeCurrency)
 }
 

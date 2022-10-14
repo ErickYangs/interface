@@ -87,6 +87,14 @@ export const FALLBACK_URLS: { [key in SupportedChainId]: string[] } = {
     // "Safe" URLs
     `https://alfajores-forno.celo-testnet.org`,
   ],
+  [SupportedChainId.ONTOLOGY_EVM]: [
+    // "Safe" URLs
+    'https://api.mycryptoapi.com/eth',
+    'https://cloudflare-eth.com',
+    // "Fallback" URLs
+    'https://rpc.ankr.com/eth',
+    'https://eth-mainnet.public.blastapi.io',
+  ],
 }
 
 /**
@@ -134,4 +142,5 @@ export const RPC_URLS: { [key in SupportedChainId]: string[] } = {
   ],
   [SupportedChainId.CELO]: FALLBACK_URLS[SupportedChainId.CELO],
   [SupportedChainId.CELO_ALFAJORES]: FALLBACK_URLS[SupportedChainId.CELO_ALFAJORES],
+  [SupportedChainId.ONTOLOGY_EVM]: [`http://polaris1.ont.io:20336`],
 }

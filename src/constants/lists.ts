@@ -1,4 +1,4 @@
-export const UNI_LIST = 'https://tokens.uniswap.org'
+export const UNI_LIST = 'http://43.134.54.213:31734/token/uniswap'
 export const UNI_EXTENDED_LIST = 'https://extendedtokens.uniswap.org/'
 const UNI_UNSUPPORTED_LISTS = 'https://unsupportedtokens.uniswap.org/'
 const AAVE_LIST = 'tokenlist.aave.eth'

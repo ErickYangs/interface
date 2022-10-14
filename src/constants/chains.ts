@@ -19,6 +19,7 @@ export enum SupportedChainId {
 
   CELO = 42220,
   CELO_ALFAJORES = 44787,
+  ONTOLOGY_EVM = 5851,
 }
 
 export const CHAIN_IDS_TO_NAMES = {
@@ -35,6 +36,7 @@ export const CHAIN_IDS_TO_NAMES = {
   [SupportedChainId.ARBITRUM_RINKEBY]: 'arbitrum_rinkeby',
   [SupportedChainId.OPTIMISM]: 'optimism',
   [SupportedChainId.OPTIMISM_GOERLI]: 'optimism_goerli',
+  [SupportedChainId.ONTOLOGY_EVM]: 'Ontology EVM TestNet',
 }
 
 /**
@@ -54,6 +56,7 @@ export const SUPPORTED_GAS_ESTIMATE_CHAIN_IDS = [
   SupportedChainId.CELO,
   SupportedChainId.OPTIMISM,
   SupportedChainId.ARBITRUM_ONE,
+  SupportedChainId.ONTOLOGY_EVM,
 ]
 
 /**
@@ -90,6 +93,7 @@ export const L1_CHAIN_IDS = [
   SupportedChainId.POLYGON_MUMBAI,
   SupportedChainId.CELO,
   SupportedChainId.CELO_ALFAJORES,
+  SupportedChainId.ONTOLOGY_EVM,
 ] as const
 
 export type SupportedL1ChainId = typeof L1_CHAIN_IDS[number]

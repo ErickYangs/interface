@@ -216,6 +216,16 @@ const CHAIN_INFO: ChainInfoMap = {
     nativeCurrency: { name: 'Celo', symbol: 'CELO', decimals: 18 },
     defaultListUrl: CELO_LIST,
   },
+  [SupportedChainId.ONTOLOGY_EVM]: {
+    networkType: NetworkType.L1,
+    docs: '',
+    explorer: 'https://explorer.ont.io/',
+    infoLink: '',
+    label: 'OntologyEVM',
+    logoUrl: ethereumLogoUrl,
+    nativeCurrency: { name: 'ONG', symbol: 'ONG', decimals: 18 },
+    color: colorsDark.chain_4,
+  },
 }
 
 export function getChainInfo(chainId: SupportedL1ChainId): L1ChainInfo
